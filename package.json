@@ -4,7 +4,7 @@
   "description": "This is an API to control basic operations in a bookstore website server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./index.js --exec babel-node -e js"
   },
   "repository": {
     "type": "git",
@@ -17,12 +17,9 @@
   },
   "homepage": "https://github.com/NelsonGP2110/group7_bookstore_Api#readme",
   "dependencies": {
-    "body-parse": "^0.1.0",
     "express": "^4.17.1",
-    "mongo": "^0.1.0",
     "mongodb": "^4.1.2",
-    "mongoose": "^6.0.8",
-    "nodemon": "^2.0.13"
+    "mongoose": "^6.0.8"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
