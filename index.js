@@ -5,10 +5,10 @@ import bodyParser from 'body-parser';
 
 const app = express();
 //const mongoose = mongoose();
-const PORT = 5000;
+const PORT = 8000;
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/books', {
+mongoose.connect('mongodb://localhost:27017/books', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
