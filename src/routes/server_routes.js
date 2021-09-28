@@ -1,5 +1,5 @@
 import {
-  getBookByTitle,
+  //getBookByTitle, // No need for this. It is the same as getBooks
   getBooks,
   getBookByGenre,
   getBookTop10
@@ -13,7 +13,7 @@ const routes = app => {
     next();
   }, getBooks);
 
-  app.route('/books/title').get(getBookByTitle);
+  //app.route('/books/title').get(getBookByTitle); // No need for this. It is the same as getBooks
   app.route('/books/genre').get(getBookByGenre);
   app.route('/books/top10').get(getBookTop10);
 };
