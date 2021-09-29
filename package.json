@@ -4,7 +4,8 @@
   "description": "This is an API to control basic operations in a bookstore website server",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js --exec babel-node -e js"
+    "start": "nodemon ./index.js --exec babel-node -e js",
+    "v": "node -v"
   },
   "repository": {
     "type": "git",
