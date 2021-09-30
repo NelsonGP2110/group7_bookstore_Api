@@ -8,10 +8,13 @@ const app = express();
 const PORT = 8000;
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/books', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect(
+  'mongodb+srv://nelgp:group7@cluster0.pmqgt.mongodb.net/bookstore_api?retryWrites=true&w=majority',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+);
 
 // bodyparser septup
 app.use(bodyParser.urlencoded({ extended: true }));
