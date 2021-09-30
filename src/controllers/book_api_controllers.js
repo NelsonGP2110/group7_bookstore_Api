@@ -59,3 +59,44 @@ export const getBookTop10 = (req, res) => {
     res.json(books);
   });
 };
+//----------------------- NELSON FEATURE-------------------------//
+//-------------------GET A LIST OF BOOKS BY RATING-----------------//
+export const getRating = (req, res) => {
+  let userRating = parseFloat(req.query.rating);
+
+  Books.aggregate(
+    [
+      { $unwind: '$rating' },
+      { $group: { _id: '$title', avg_rating: { $avg: '$rating' } } },
+      { $match: { avg_rating: { $gte: userRating } } }
+    ],
+    (err, books) => {
+      if (err) {
+        //console.log(err);
+        res.send(err);
+      } else if (userRating < 1 || userRating > 5) {
+        res.json(
+          `Selection out of range. Please select a value between 1 and 5 included.`
+        );
+      } else {
+        // console.log;
+        //console.log(books);
+        res.json(books);
+      }
+    }
+  );
+};
+//----------------------- NELSON FEATURE-------------------------//
+//----------------SELECT A PORTION OF THE DATABASE--------------//
+export const getSelection = (req, res) => {
+  let start = parseInt(req.query.startpos) - 1;
+  let temp = parseInt(req.query.endpos);
+  let end = temp - start;
+
+  Books.find({}, null, { skip: start, limit: end }, (err, books) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(books);
+  });
+};

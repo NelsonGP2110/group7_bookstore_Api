@@ -2,7 +2,9 @@ import {
   //getBookByTitle, // No need for this. It is the same as getBooks
   getBooks,
   getBookByGenre,
-  getBookTop10
+  getBookTop10,
+  getRating,
+  getSelection
 } from '../controllers/book_api_controllers';
 
 const routes = app => {
@@ -16,6 +18,8 @@ const routes = app => {
   //app.route('/books/title').get(getBookByTitle); // No need for this. It is the same as getBooks
   app.route('/books/genre').get(getBookByGenre);
   app.route('/books/top10').get(getBookTop10);
+  app.route('/books/ratingselection').get(getRating);
+  app.route('/books/getselection').get(getSelection);
 };
 
 export default routes;
