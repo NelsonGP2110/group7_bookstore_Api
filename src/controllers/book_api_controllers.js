@@ -68,7 +68,8 @@ export const getBookByGenre = (req, res) => {
 
 //----------------------- NELSON FEATURE-------------------------//
 //-------------------GET A LIST OF TOP 10 BOOKS-----------------//
-
+/* This function sort the db using the key copies_sold from higher to lower.
+Then, it respond by sending the first 10 highest values. */
 export const getBookTop10 = (req, res) => {
   Books.find({}, null, { sort: { copies_sold: 'desc' }, limit: 10 }, function(
     err,
