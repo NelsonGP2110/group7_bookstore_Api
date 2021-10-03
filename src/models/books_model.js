@@ -37,7 +37,7 @@ export const BooksSchema = new Schema({
   },
   book_about: {
     type: String,
-    required: `Enter the description of th book`
+    required: `Enter the description of the book`
   },
   publisher: {
     type: String,
