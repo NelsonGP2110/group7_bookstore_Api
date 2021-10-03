@@ -45,7 +45,7 @@ export const BooksSchema = new Schema({
   },
   date_published: {
     type: Date,
-    required: `Enter the pubblished date`
+    required: `Enter the published date`
   },
   copies_sold: {
     type: Number
