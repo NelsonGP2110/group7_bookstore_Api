@@ -35,7 +35,6 @@ export const getBookByGenre = (req, res) => {
   let str = genre.trim();
   let str1 = str.toLowerCase();
   let str2 = str1.charAt(0).toUpperCase() + str1.slice(1);
-  //console.log(str2);
   Books.find({ genre: { $all: [str2] } }, (err, books) => {
     if (err) {
       res.send(err);
@@ -72,15 +71,12 @@ export const getRating = (req, res) => {
     ],
     (err, books) => {
       if (err) {
-        //console.log(err);
         res.send(err);
       } else if (userRating < 1 || userRating > 5) {
         res.json(
           `Selection out of range. Please select a value between 1 and 5 included.`
         );
       } else {
-        // console.log;
-        //console.log(books);
         res.json(books);
       }
     }
