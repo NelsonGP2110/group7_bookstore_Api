@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/NelsonGP2110/group7_bookstore_Api#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "mongodb": "^4.1.2",
     "mongoose": "^6.0.8"
