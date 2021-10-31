@@ -119,9 +119,58 @@ router.get('/:username', (req, res, next) => {
                 homeAddress: user[0].homeAddress
             });
         })
-        .catch()
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        })
 });
 
+// Handle route to update the fields of a user
+router.put('/update/:username', (req, res, next) => {
+    // Check if the user exists
+    User.find({ username: req.params.username })
+        .exec()
+        .then(user => {
+            if (user.length == 0) { // update user for length >= 1
+                return res.status(409).json({
+                    message: "User does not exist."
+                });
+            }
+            else {
+                bcrypt.hash(req.body.password, 10, (err, hash) => {
+                    if (err) {
+                        return res.status(500).json({
+                            error: err
+                        });
+                    } else {
+                        User.findOneAndUpdate({ username: req.params.username }, {
+                            $set: {
+                                name: req.body.name,
+                                password: hash,
+                                email: req.body.email,
+                                homeAddress: req.body.homeAddress
+                            }
+                        })
+                            .then(result => {
+                                console.log(result);
+                                res.status(201).json({
+                                    message: 'User updated successfully.'
+                                })
+                            })
+                            .catch(err => {
+                                console.log(err);
+                                res.status(500).json({
+                                    error: err
+                                });
+                            });
+                    }
+                })
+
+            }
+        })
+});
 
 module.exports = router;
 
