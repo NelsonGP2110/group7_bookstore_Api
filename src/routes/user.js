@@ -211,6 +211,12 @@ router.post('/add/creditcard', async (req, res, next) => {
                     })
             }
         })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
 });
 
 // Handle route to retrieve the list of credit cards of users
@@ -235,6 +241,12 @@ router.get('/creditcards/:username', (req, res, next) => {
                     });
             }
         })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
 });
 module.exports = router;
 
