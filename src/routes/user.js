@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const CreditCard = require('../models/credit_card_model');
 const e = require("express");
 
 // Handle route to create a new user
@@ -116,7 +117,7 @@ router.get('/:username', (req, res, next) => {
                 password: user[0].password,
                 name: user[0].name,
                 email: user[0].email,
-                homeAddress: user[0].homeAddress
+                homeAddress: user[0].homeAddress,
             });
         })
         .catch(err => {
@@ -172,5 +173,68 @@ router.put('/update/:username', (req, res, next) => {
         })
 });
 
+
+// Handle route to create credit card for user
+router.post('/add/creditcard', async (req, res, next) => {
+    User.find({ username: req.body.username })
+        .exec()
+        .then(user => {
+            if (user.length == 0) {
+                return res.status(409).json({
+                    message: "User does not exist."
+                });
+            }
+            else {
+                CreditCard.find({ credit_card_number: req.body.credit_card_number })
+                    .then(creditCard => {
+                        if (creditCard.length >= 1) {
+                            return res.status(409).json({
+                                message: "Credit Card already added to this account."
+                            });
+                        }
+                        else {
+                            const creditCard = new CreditCard({
+                                credit_card_number: req.body.credit_card_number,
+                                cardholder_username: req.body.username,
+                                expiration_date: req.body.expiration_date,
+                                security_code_cvv: req.body.security_code_cvv
+                            });
+
+                            creditCard.save(function (err) {
+                                if (err) return handleError(err);
+                            });
+
+                            res.status(201).json({
+                                message: 'Credit card added successfully.'
+                            })
+                        }
+                    })
+            }
+        })
+});
+
+// Handle route to retrieve the list of credit cards of users
+router.get('/creditcards/:username', (req, res, next) => {
+    User.find({ username: req.params.username })
+        .exec()
+        .then(user => {
+            if (user.length == 0) { // update user for length >= 1
+                return res.status(409).json({
+                    message: "User does not exist."
+                });
+            }
+            else {
+                CreditCard.find({ cardholder_username: req.body.username },
+                    function (err, result) {
+                        if (err) {
+                            res.send(err);
+                        }
+                        else {
+                            res.json(result);
+                        }
+                    });
+            }
+        })
+});
 module.exports = router;
 
