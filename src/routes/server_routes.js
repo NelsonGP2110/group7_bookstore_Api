@@ -5,6 +5,12 @@ import {
   getRating,
   getSelection
 } from '../controllers/book_api_controllers';
+import {
+  createShoppingCart,
+  addToCart,
+  viewCart,
+  deleteFromCart
+} from '../controllers/cart_controllers.js';
 
 const routes = app => {
   app.route('/books').get(getBooks);
@@ -12,6 +18,7 @@ const routes = app => {
   app.route('/books/top10').get(getBookTop10);
   app.route('/books/ratingselection').get(getRating);
   app.route('/books/getselection').get(getSelection);
+  app.route('/cart/create').post(createShoppingCart);
 };
 
 export default routes;

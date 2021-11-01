@@ -20,7 +20,7 @@ export const BooksSchema = new Schema({
     required: 'Enter a first name'
   },
   isbn: {
-    type: Number,
+    type: String,
     required: 'Enter a ISBN code'
   },
   rating: {
