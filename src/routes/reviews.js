@@ -2,7 +2,7 @@ const { response } = require('express');
 var cron = require('node-cron');
 var express = require('express');
 var router = express.Router({mergeParams:true});
-var BookModel = require('../../models/book');
+var BookModel = require('../../models/book_model');
 var ReviewModel = require('../../models/review');
 
 //const { routes } = require('../../app.js');
