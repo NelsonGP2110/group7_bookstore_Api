@@ -1,6 +1,7 @@
 import express from 'express';
 import routes from './src/routes/server_routes';
 import userRoutes from './src/routes/user';
+import reviewRoutes from './src/routes/reviews';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 
@@ -21,6 +22,8 @@ mongoose.connect(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.use(express.json());
+app.use("/user", userRoutes);
+app.use("/books/:isbn/reviews", reviewRoutes);
 
 
 routes(app);
