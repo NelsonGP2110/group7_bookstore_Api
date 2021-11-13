@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import express from 'express';
 import ShoppingCart from '../models/cart_model.js';
-import User from '../models/user.js';
+import User from '../models/user_model.js';
 import { BooksSchema } from '../models/books_model';
 
 const Books = mongoose.model('Books', BooksSchema);

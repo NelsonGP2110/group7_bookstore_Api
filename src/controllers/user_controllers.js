@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const User = require('../models/user');
+const User = require('../models/user_model');
 const CreditCard = require('../models/credit_card_model');
 const e = require("express");
 
@@ -248,5 +248,5 @@ router.get('/creditcards/:username', (req, res, next) => {
             });
         });
 });
-//module.exports = router;
+module.exports = router;
 
