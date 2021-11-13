@@ -21,6 +21,7 @@ const routes = app => {
   app.route('/cart/create').post(createShoppingCart);
   app.route('/cart/update').post(addToCart);
   app.route('/cart/viewCart').get(viewCart);
+  app.route('/cart/delete').post(deleteFromCart);
 };
 
 export default routes;
