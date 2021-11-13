@@ -41,13 +41,25 @@ export const createShoppingCart = async (req, res, next) => {
 export const addToCart = async (req, res, next) => {
     //Finds the book details for the requested book to be added to cart
     let bookToAdd = await Books.find({"isbn" : `${req.query.isbn}`},{"title" : 1 , "price" : 1}).exec()
+     let bookTitle =  bookToAdd[0].title;
     let cartOwner = await User.find({"username" : `${req.query.username}`}).exec()
-    let shoppingCart = ShoppingCart.find()
+    let shoppingCart = await ShoppingCart.find({"username" : `${req.query.username}`}).exec()
+
+    let newCartBooks = shoppingCart[0].books;
+    newCartBooks.push(bookTitle);
+    await ShoppingCart.updateOne( { "username": `${req.query.username}` },
+    {
+      $set: {
+        books: newCartBooks
+      }});
+    // person.friends.push(friend);
+    // person.save(done);
     res.json({ 
-        msg: `Successfully added ${bookToAdd[0].title} to ${cartOwner[0].username}'s cart!`
+        msg: `Successfully added ${bookTitle} to ${cartOwner[0].username}'s cart!`
     }
     );
-    console.log(req.query.isbn , cartOwner);
+   
+    console.log(req.query.isbn , cartOwner[0],newCartBooks,bookTitle);
     //let bookPrice = bookToAdd[0].price
 }
 //View books in cart
