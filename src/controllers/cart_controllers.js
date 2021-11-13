@@ -63,8 +63,14 @@ export const addToCart = async (req, res, next) => {
     //let bookPrice = bookToAdd[0].price
 }
 //View books in cart
-export const viewCart = (req, res, next)=> {
-    
+export const viewCart = async (req, res, next)=> {
+    let cartOwner = await User.find({"username" : `${req.query.username}`}).exec()
+    let shoppingCart = await ShoppingCart.find({"username" : `${req.query.username}`}).exec()
+    res.json({ 
+        msg:`Here are the current items in ${req.query.username}'s cart!`,
+        CartItems: shoppingCart[0].books
+    }
+    );
 }
 //Delete a book from the shopping cart
 export const deleteFromCart = (req, res, next)=> {
