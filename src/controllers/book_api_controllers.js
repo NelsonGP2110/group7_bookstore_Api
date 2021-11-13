@@ -36,7 +36,7 @@ export const getBookByGenre = (req, res) => {
 /* This function sort the db using the key copies_sold from higher to lower.
 Then, it respond by sending the first 10 highest values. */
 export const getBookTop10 = (req, res) => {
-  Books.find({}, null, { sort: { copies_sold: 'desc' }, limit: 10 }, function(
+  Books.find({}, null, { sort: { copies_sold: 'desc' }, limit: 10 }, function (
     err,
     books
   ) {
@@ -75,12 +75,19 @@ export const getRating = (req, res) => {
 export const getSelection = (req, res) => {
   let start = parseInt(req.query.startpos) - 1;
   let temp = parseInt(req.query.endpos);
-  let end = temp - start;
 
-  Books.find({}, null, { skip: start, limit: end }, (err, books) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json(books);
-  });
+  if (temp <= start) {
+    res.json(`Invalid ending number. Try again`);
+  } else if (temp < 0 || start < 1) {
+    res.json(`Invalid selection. Try again`);
+  } else {
+    let end = temp - start;
+
+    Books.find({}, null, { skip: start, limit: end }, (err, books) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json(books);
+    });
+  }
 };

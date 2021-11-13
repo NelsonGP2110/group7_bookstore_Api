@@ -5,7 +5,12 @@ import {
   getRating,
   getSelection
 } from '../controllers/book_api_controllers';
-import { createShoppingCart, addToCart, viewCart, deleteFromCart} from '../controllers/cart_controllers.js';
+import {
+  createShoppingCart,
+  addToCart,
+  viewCart,
+  deleteFromCart
+} from '../controllers/cart_controllers.js';
 
 const routes = app => {
   app.route('/books').get(getBooks);

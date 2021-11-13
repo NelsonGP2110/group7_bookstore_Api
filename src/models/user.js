@@ -13,7 +13,8 @@ const userSchema = mongoose.Schema({
     name: { type: String, required: false },
     email: { type: String, required: false },
     homeAddress: { type: String, required: false },
-    shopping_cart_id: {type: mongoose.Schema.Types.ObjectId, ref: 'ShoppingCart'}
+    shopping_cart_id: { type: mongoose.Schema.Types.ObjectId, ref: 'ShoppingCart' },
+    credit_cards: [{ type: mongoose.Schema.Types.ObjectId, ref: 'CreditCard', required: false }]
 });
 
 module.exports = mongoose.model('User', userSchema);
