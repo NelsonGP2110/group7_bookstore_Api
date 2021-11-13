@@ -20,6 +20,7 @@ const routes = app => {
   app.route('/books/getselection').get(getSelection);
   app.route('/cart/create').post(createShoppingCart);
   app.route('/cart/update').post(addToCart);
+  app.route('/cart/viewCart').get(viewCart);
 };
 
 export default routes;
