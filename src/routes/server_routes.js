@@ -14,6 +14,7 @@ const routes = app => {
   app.route('/books/ratingselection').get(getRating);
   app.route('/books/getselection').get(getSelection);
   app.route('/cart/create').post(createShoppingCart);
+  app.route('/cart/update').post(addToCart);
 };
 
 export default routes;

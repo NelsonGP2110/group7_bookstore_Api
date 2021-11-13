@@ -2,6 +2,15 @@ import mongoose from 'mongoose';
 import express from 'express';
 import ShoppingCart from '../models/cart_model.js';
 import User from '../models/user.js';
+import { BooksSchema } from '../models/books_model';
+
+const Books = mongoose.model('Books', BooksSchema);
+const app = express();
+app.use(express.json());
+
+
+
+
 
 //Create a shopping cart instance for a user
 export const createShoppingCart = async (req, res, next) => {
@@ -26,32 +35,20 @@ export const createShoppingCart = async (req, res, next) => {
         }
             
     });
-
-    //Finds the user document for the shopping cart pending creation
-    // User.find({ username: req.body.username })
-    //     .exec()
-    //     .then(user => {
-    //         if (user.length >= 1) { // create a new user for length = 0
-    //             return res.status(200).json({
-    //                 message: "valid User"
-    //             });
-    //         }
-    //         else {
-    //             return res.status(409).json({
-    //                 message: "Email does not exist"
-    //             });
-    //         }
-
-   /**const shoppingCart = await ShoppingCart.create(req.body);
-   res.status(201).json({
-       success: true,
-       data: shoppingCart
-   });**/
 };
 
 //Add books to a shopping cart
-export const addToCart = (req, res, next) => {
-    
+export const addToCart = async (req, res, next) => {
+    //Finds the book details for the requested book to be added to cart
+    let bookToAdd = await Books.find({"isbn" : `${req.query.isbn}`},{"title" : 1 , "price" : 1}).exec()
+    let cartOwner = await User.find({"username" : `${req.query.username}`}).exec()
+    let shoppingCart = ShoppingCart.find()
+    res.json({ 
+        msg: `Successfully added ${bookToAdd[0].title} to ${cartOwner[0].username}'s cart!`
+    }
+    );
+    console.log(req.query.isbn , cartOwner);
+    //let bookPrice = bookToAdd[0].price
 }
 //View books in cart
 export const viewCart = (req, res, next)=> {

@@ -20,6 +20,7 @@
   "dependencies": {
     "babel-register": "^6.26.0",
     "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
     "cjs": "^0.0.11",
     "cjs-loader": "^0.1.0",
     "express": "^4.17.1",
