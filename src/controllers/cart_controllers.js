@@ -59,7 +59,7 @@ export const addToCart = async (req, res, next) => {
     }
     );
    
-    console.log(req.query.isbn , cartOwner[0],newCartBooks,bookTitle);
+   // console.log(req.query.isbn , cartOwner[0],newCartBooks,bookTitle);
     //let bookPrice = bookToAdd[0].price
 }
 //View books in cart
@@ -73,6 +73,28 @@ export const viewCart = async (req, res, next)=> {
     );
 }
 //Delete a book from the shopping cart
-export const deleteFromCart = (req, res, next)=> {
-    
+export const deleteFromCart = async (req, res, next)=> {
+   let bookToDelete = await Books.find({"isbn" : `${req.query.isbn}`},{"title" : 1 , "price" : 1}).exec()
+   let bookTitle =  bookToDelete[0].title;
+   let cartOwner = await User.find({"username" : `${req.query.username}`}).exec()
+   let shoppingCart = await ShoppingCart.find({"username" : `${req.query.username}`}).exec()
+
+   let newCartBooks = shoppingCart[0].books;
+   const index = newCartBooks.indexOf(bookTitle);
+    if (index > -1) {
+    newCartBooks.splice(index, 1);
+    }
+   
+   await ShoppingCart.updateOne( { "username": `${req.query.username}` },
+   {
+     $set: {
+       books: newCartBooks
+     }});
+   // person.friends.push(friend);
+   // person.save(done);
+   res.json({ 
+       msg: `Successfully removed ${bookTitle} to ${cartOwner[0].username}'s cart!`
+   }
+   );
+  console.log(newCartBooks);
 }
