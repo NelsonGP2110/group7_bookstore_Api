@@ -14,7 +14,8 @@ const userSchema = mongoose.Schema({
     email: { type: String, required: false },
     homeAddress: { type: String, required: false },
     shopping_cart_id: { type: mongoose.Schema.Types.ObjectId, ref: 'ShoppingCart' },
-    credit_cards: [{ type: mongoose.Schema.Types.ObjectId, ref: 'CreditCard', required: false }]
+    credit_cards: [{ type: mongoose.Schema.Types.ObjectId, ref: 'CreditCard', required: false }],
+    wishlists: { type: mongoose.Schema.Types.ObjectId, ref: 'wishlist' },
 });
 
 module.exports = mongoose.model('User', userSchema);

@@ -12,6 +12,13 @@ import {
   deleteFromCart
 } from '../controllers/cart_controllers.js';
 
+import {
+  createWishlist,
+  addToWishlist,
+  viewWishlist,
+  deleteFromWishlist
+} from '../controllers/wishlist_controllers.js';
+
 const routes = app => {
   app.route('/books').get(getBooks);
   app.route('/books/genre').get(getBookByGenre);
@@ -22,6 +29,10 @@ const routes = app => {
   app.route('/cart/update').post(addToCart);
   app.route('/cart/viewCart').get(viewCart);
   app.route('/cart/delete').post(deleteFromCart);
+  app.route('/wishlist/create').post(createWishlist);
+  app.route('/wishlist/addBook').post(addToWishlist);
+  app.route('/wishlist/view').get(viewWishlist);
+  app.route('/wishlist/remove').post(deleteFromWishlist);
 };
 
 export default routes;
