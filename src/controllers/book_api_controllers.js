@@ -68,6 +68,10 @@ export const getRating = (req, res) => {
         res.json(
           `Selection out of range. Please select a value between 1 and 5 included.`
         );
+      } else if (books == 0) {
+        res.json(
+          `No books with rating ${userRating} or higher in the database`
+        );
       } else {
         res.json(books);
       }
