@@ -27,7 +27,11 @@ export const getBookByGenre = (req, res) => {
     if (err) {
       res.send(err);
     }
-    res.json(books);
+    if (books == null || books == 0) {
+      res.json('Genre not found');
+    } else {
+      res.json(books);
+    }
   });
 };
 
@@ -36,7 +40,7 @@ export const getBookByGenre = (req, res) => {
 /* This function sort the db using the key copies_sold from higher to lower.
 Then, it respond by sending the first 10 highest values. */
 export const getBookTop10 = (req, res) => {
-  Books.find({}, null, { sort: { copies_sold: 'desc' }, limit: 10 }, function (
+  Books.find({}, null, { sort: { copies_sold: 'desc' }, limit: 10 }, function(
     err,
     books
   ) {
@@ -63,6 +67,10 @@ export const getRating = (req, res) => {
       } else if (userRating < 1 || userRating > 5) {
         res.json(
           `Selection out of range. Please select a value between 1 and 5 included.`
+        );
+      } else if (books == 0) {
+        res.json(
+          `No books with rating ${userRating} or higher in the database`
         );
       } else {
         res.json(books);
