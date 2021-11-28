@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 
 const app = express();
+
 //const mongoose = mongoose();
 const PORT = 8000;
 
@@ -21,7 +22,6 @@ mongoose.connect(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.use(express.json());
-
 
 routes(app);
 

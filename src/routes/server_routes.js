@@ -11,6 +11,14 @@ import {
   viewCart,
   deleteFromCart
 } from '../controllers/cart_controllers.js';
+import {
+  signup,
+  login,
+  getUser,
+  updateUser,
+  addCreditCard,
+  getCreditCards
+} from '../controllers/user_controllers.js';
 
 const routes = app => {
   app.route('/books').get(getBooks);
@@ -22,6 +30,12 @@ const routes = app => {
   app.route('/cart/update').post(addToCart);
   app.route('/cart/viewCart').get(viewCart);
   app.route('/cart/delete').post(deleteFromCart);
+  app.route('/user/signup').post(signup);
+  app.route('/user/login').post(login);
+  app.route('/user/getuser').get(getUser);
+  app.route('/user/updateuser').put(updateUser);
+  app.route('/user/add/creditcard').post(addCreditCard);
+  app.route('/user/creditcards/').get(getCreditCards);
 };
 
 export default routes;

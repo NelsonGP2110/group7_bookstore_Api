@@ -6,10 +6,11 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user_model');
 const CreditCard = require('../models/credit_card_model');
-const e = require("express");
+//const e = require("express");
+const app = express();
+app.use(express.json());
 
-// Handle route to create a new user
-router.post('/signup', (req, res, next) => {
+export const signup = async (req, res, next) => {
     // Check if the user already exists
     User.find({ username: req.body.username })
         .exec()
@@ -53,10 +54,9 @@ router.post('/signup', (req, res, next) => {
 
             }
         })
-});
+};
 
-// Handle route for user login
-router.post('/login', (req, res, next) => {
+export const login = async (req, res, next) => {
     User.find({ username: req.body.username })
         .exec()
         .then(user => {
@@ -99,11 +99,10 @@ router.post('/login', (req, res, next) => {
                 error: err
             });
         });
-});
+};
 
-// Handle route to retrive user and its fields by their username
-router.get('/:username', (req, res, next) => {
-    const usernamePar = req.params.username;
+export const getUser = async (req, res, next) => {
+    const usernamePar = req.body.username;
     User.find({ username: usernamePar })
         .exec()
         .then(user => {
@@ -126,12 +125,11 @@ router.get('/:username', (req, res, next) => {
                 error: err
             });
         })
-});
+};
 
-// Handle route to update the fields of a user
-router.put('/update/:username', (req, res, next) => {
+export const updateUser = async (req, res, next) => {
     // Check if the user exists
-    User.find({ username: req.params.username })
+    User.find({ username: req.body.username })
         .exec()
         .then(user => {
             if (user.length == 0) { // update user for length >= 1
@@ -146,7 +144,7 @@ router.put('/update/:username', (req, res, next) => {
                             error: err
                         });
                     } else {
-                        User.findOneAndUpdate({ username: req.params.username }, {
+                        User.findOneAndUpdate({ username: req.body.username }, {
                             $set: {
                                 name: req.body.name,
                                 password: hash,
@@ -171,11 +169,9 @@ router.put('/update/:username', (req, res, next) => {
 
             }
         })
-});
+};
 
-
-// Handle route to create credit card for user
-router.post('/add/creditcard', async (req, res, next) => {
+export const addCreditCard = async (req, res, next) => {
     User.find({ username: req.body.username })
         .exec()
         .then(user => {
@@ -189,7 +185,7 @@ router.post('/add/creditcard', async (req, res, next) => {
                     .then(creditCard => {
                         if (creditCard.length >= 1) {
                             return res.status(409).json({
-                                message: "Credit Card already added to this account."
+                                message: "Credit Card already exists."
                             });
                         }
                         else {
@@ -217,10 +213,9 @@ router.post('/add/creditcard', async (req, res, next) => {
                 error: err
             });
         });
-});
+};
 
-// Handle route to retrieve the list of credit cards of users
-router.get('/creditcards/:username', (req, res, next) => {
+export const getCreditCards = async (req, res, next) => {
     User.find({ username: req.params.username })
         .exec()
         .then(user => {
@@ -247,6 +242,5 @@ router.get('/creditcards/:username', (req, res, next) => {
                 error: err
             });
         });
-});
-module.exports = router;
+};
 
