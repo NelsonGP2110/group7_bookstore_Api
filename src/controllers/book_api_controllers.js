@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { BooksSchema } from '../models/books_model';
 
 const Books = mongoose.model('Books', BooksSchema);
-
+//GET the whole book database
 export const getBooks = (req, res) => {
   Books.find({}, (err, books) => {
     if (err) {
@@ -12,10 +12,7 @@ export const getBooks = (req, res) => {
   });
 };
 
-//----------------------- NELSON FEATURE-------------------------//
-//-----------------GET A LIST OF BOOKS BY GENRE-----------------//
-
-/*this sends a request for the param genre , using a query to get the param and the key
+/*send a request for the param genre , using a query to get the param and the key
 and then show the matches from the db.*/
 export const getBookByGenre = (req, res) => {
   //Cleaning query input.
@@ -35,8 +32,6 @@ export const getBookByGenre = (req, res) => {
   });
 };
 
-//----------------------- NELSON FEATURE-------------------------//
-//-------------------GET A LIST OF TOP 10 BOOKS-----------------//
 /* This function sort the db using the key copies_sold from higher to lower.
 Then, it respond by sending the first 10 highest values. */
 export const getBookTop10 = (req, res) => {
@@ -50,8 +45,7 @@ export const getBookTop10 = (req, res) => {
     res.json(books);
   });
 };
-//----------------------- NELSON FEATURE-------------------------//
-//-------------------GET A LIST OF BOOKS BY RATING-----------------//
+
 export const getRating = (req, res) => {
   let userRating = parseFloat(req.query.rating);
 
@@ -78,8 +72,7 @@ export const getRating = (req, res) => {
     }
   );
 };
-//----------------------- NELSON FEATURE-------------------------//
-//----------------SELECT A PORTION OF THE DATABASE--------------//
+// GET a portion of the database
 export const getSelection = (req, res) => {
   let start = parseInt(req.query.startpos) - 1;
   let temp = parseInt(req.query.endpos);
