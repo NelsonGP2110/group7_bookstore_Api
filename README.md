@@ -9,3 +9,7 @@ Nelson Garcia
 1-) GET a list of books by genre
 
 2-) GET a list with the top 10 books (the more sold).
+
+3-) GET a list of books by rating 
+
+4-) GET a portion of the database
