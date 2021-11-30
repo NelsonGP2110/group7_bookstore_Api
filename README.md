@@ -33,3 +33,9 @@ Matias Fuenzaldia
 3-) Remove books specified by the isbn, username, and wishlist name.
 
 4-) View the wishlist specified with the wishlist name and username.
+
+Richard Garcia
+1-) Create a shopping cart instance for a user
+2-) View items in a user shopping cart
+3-) Add items to a users shopping cart 
+4-) delete items from a user shopping cart
