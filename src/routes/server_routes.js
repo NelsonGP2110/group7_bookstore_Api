@@ -4,7 +4,7 @@ import {
   getBookTop10,
   getRating,
   getSelection
-} from '../controllers/book_api_controllers';
+} from '../controllers/book_controllers';
 import {
   createShoppingCart,
   addToCart,
