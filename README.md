@@ -23,3 +23,13 @@ Amy Garcia
 3-) Update the user and any of their fields except for mail 
 
 4-) Create Credit Card that belongs to a User and Retrieve a list of cards for that user 
+
+Matias Fuenzaldia
+
+1-) Create a wishlist and assign it to a Username and a title to the wishlist.
+
+2-) Add Books to the wishlist specified by the isbn, username, and wishlist name.
+
+3-) Remove books specified by the isbn, username, and wishlist name.
+
+4-) View the wishlist specified with the wishlist name and username.
