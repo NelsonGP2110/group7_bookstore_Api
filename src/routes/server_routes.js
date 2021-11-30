@@ -7,7 +7,7 @@ import {
   getBookByIsbn,
   getBookByAuthor,
   createBook
-} from '../controllers/book_api_controllers.js';
+} from '../controllers/book_controllers.js';
 import {
   createShoppingCart,
   addToCart,

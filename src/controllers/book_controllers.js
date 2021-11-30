@@ -92,3 +92,85 @@ export const getSelection = (req, res) => {
     });
   }
 };
+
+export const getBookByIsbn = (req, res) => {
+  //Cleaning query input.
+  let isbn = req.query.isbn;
+  let str = isbn.trim();
+  let str1 = str.toLowerCase();
+  let str2 = str1.charAt(0).toUpperCase() + str1.slice(1);
+  Books.find({ isbn: { $all: [str2] } }, (err, books) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(books);
+  });
+};
+
+export const getBookByAuthor = async (req, res) => {
+  //Cleaning query input.
+  let author = req.query.author;
+  let str = author.trim();
+  let str1 = str.toLowerCase();
+  let str2 = str1.charAt(0).toUpperCase() + str1.slice(1);
+
+  const foundAuthor = await Authors.findOne({
+    last_name: { $all: [str2] }
+  });
+
+  if (!foundAuthor) {
+    return res.json([]);
+  }
+
+  Books.find({ author: foundAuthor._id }, (err, books) => {
+    if (err) {
+      res.send(err);
+    }
+    res.json(books);
+  });
+};
+
+export const createBook = async (req, res) => {
+  const {
+    isbn,
+    title,
+    book_about,
+    price,
+    authorId,
+    genre,
+    publisher,
+    year_published,
+    copies_sold
+  } = req.body;
+
+  const isValidAuthor = await Authors.findOne({ _id: authorId });
+
+  if (!isValidAuthor) {
+    return res.status(404).json({
+      msg: 'Author not found.'
+    });
+  }
+
+  try {
+    const book = await Books.create({
+      isbn,
+      title,
+      book_about,
+      price,
+      author: authorId,
+      genre,
+      publisher,
+      year_published,
+      copies_sold
+    });
+
+    res.status(201).json({
+      msg: 'Book successfully created',
+      book
+    });
+  } catch (error) {
+    res.status(400).json({
+      msg: 'One or more values are invalid. Please check data and try again.'
+    });
+  }
+};
