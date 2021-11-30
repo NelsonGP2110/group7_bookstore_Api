@@ -141,7 +141,7 @@ router.patch('/:id',(req,res,next)=>{
 router.delete('/:id',(req, res, next)=>{
     // Delete book review for the current logged in session user
 
-    let user_id = "61639b62f40ed2adc9fa3486"; // Session user id, retrieve this from your implemented authentication system
+    let user_id = "61639b62f40ed2adc9fa3486"; 
 
     ReviewModel.findOneAndRemove({
         _id: req.params.id,
