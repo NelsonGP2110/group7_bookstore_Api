@@ -13,9 +13,23 @@ const userSchema = mongoose.Schema({
     name: { type: String, required: false },
     email: { type: String, required: false },
     homeAddress: { type: String, required: false },
-    shopping_cart_id: { type: mongoose.Schema.Types.ObjectId, ref: 'ShoppingCart' },
-    credit_cards: [{ type: mongoose.Schema.Types.ObjectId, ref: 'CreditCard', required: false }],
-    wishlists: { type: mongoose.Schema.Types.ObjectId, ref: 'wishlist' },
+    shopping_cart_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'ShoppingCart',
+    },
+    credit_cards: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'CreditCard',
+            required: false,
+        },
+    ],
+    role: {
+        type: String,
+        // Restrict values to 'admin' and 'user'
+        enum: ['admin', 'user'],
+        default: 'user',
+    },
 });
 
 module.exports = mongoose.model('User', userSchema);
