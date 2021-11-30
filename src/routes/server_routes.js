@@ -58,6 +58,8 @@ const routes = app => {
   app.route('/user/add/creditcard').post(addCreditCard);
   app.route('/user/creditcards/').get(getCreditCards);
   app.route('/books/isbn').get(getBookByIsbn);
+  //app.route('/user', userRoutes);
+  //app.route('/books/:isbn/reviews', reviewRoutes);
   app.route('/books/author').get(getBookByAuthor);
   app
     .route('/authors')
