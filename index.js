@@ -1,6 +1,5 @@
 import express from 'express';
 import routes from './src/routes/server_routes';
-import userRoutes from './src/controllers/user_controllers';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 

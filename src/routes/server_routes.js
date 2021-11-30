@@ -7,7 +7,7 @@ import {
   getBookByIsbn,
   getBookByAuthor,
   createBook
-} from '../controllers/book_api_controllers';
+} from '../controllers/book_api_controllers.js';
 import {
   createShoppingCart,
   addToCart,
@@ -18,7 +18,7 @@ import { createAuthor } from '../controllers/author_controllers';
 import {
   authenticateUser,
   authorizeRoles
-} from '../middleware/auth_middleware';
+} from '../middleware/auth_middleware.js';
 import {
   createWishlist,
   addToWishlist,
@@ -33,6 +33,7 @@ import {
   addCreditCard,
   getCreditCards
 } from '../controllers/user_controllers.js';
+
 const routes = app => {
   app
     .route('/books')
