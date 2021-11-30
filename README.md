@@ -35,7 +35,21 @@ Matias Fuenzaldia
 4-) View the wishlist specified with the wishlist name and username.
 
 Richard Garcia
+
 1-) Create a shopping cart instance for a user
+
 2-) View items in a user shopping cart
+
 3-) Add items to a users shopping cart 
+
 4-) delete items from a user shopping cart
+
+David Garcia
+
+1-) Create a book with title, ISBN, description, price, author, genre, publisher, year published and copies sold.
+
+2-) Retrieve a book’s details by the ISBN.
+
+3-) Create an author with first name, last name, biography and publisher.
+
+4-) Retrieve a list of books associate with an author.
