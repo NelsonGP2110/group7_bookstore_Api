@@ -2,6 +2,8 @@
 
 This is an API to control basic operations in a bookstore website server.
 
+Remove Node Modules folder and run npm install. Then run npm start to run server
+
 Features by team members
 
 Nelson Garcia
