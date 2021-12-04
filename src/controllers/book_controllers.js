@@ -79,7 +79,7 @@ export const getSelection = (req, res) => {
 
   if (temp <= start) {
     res.json(`Invalid ending number. Try again`);
-  } else if (temp < 0 || start < 1) {
+  } else if (temp < 0 || start < 0) {
     res.json(`Invalid selection. Try again`);
   } else {
     let end = temp - start;
