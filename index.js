@@ -10,7 +10,7 @@ const PORT = 8000;
 
 mongoose.Promise = global.Promise;
 mongoose.connect(
-  'mongodb+srv://nelgp:group7@cluster0.pmqgt.mongodb.net/bookstore_api?retryWrites=true&w=majority',
+  //link to database
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
